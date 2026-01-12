@@ -7,5 +7,5 @@ Sources:
 - Github Copilot
     - https://github.com/github/awesome-copilot/tree/main
 - Others
-    - https://github.com/steveyegge/beads?tab=readme-ov-file
+    - https://github.com/steveyegge/beads
     
