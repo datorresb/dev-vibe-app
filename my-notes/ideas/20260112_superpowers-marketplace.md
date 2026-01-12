@@ -27,7 +27,7 @@ Artículo tutorial sobre Superpowers Marketplace, un catálogo curado de complem
 
 ## Plataforma objetivo
 
-- Zenn (español)
+- EsPersonal (español)
 
 ## Perspectiva
 

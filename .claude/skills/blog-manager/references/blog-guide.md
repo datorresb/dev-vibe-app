@@ -1,12 +1,11 @@
-# Zenn Article Guide
+# EsPersonal Article Guide
 
-Guía para crear artículos técnicos (en español) para publicar en Zenn.
+Guía para crear artículos técnicos (en español) para publicar en EsPersonal.
 
 ## Output
 
-Archivo generado: `.draft/YYYYMMDD_article-zenn.md`
-
-**Formato de nombre de archivo:** `YYYYMMDD_` es la fecha de generación (8 dígitos) (ej.: `20241215_article-zenn.md`)
+Archivo generado: `.draft/YYYYMMDD_article-EsPersonal.md`
+**Formato de nombre de archivo:** `YYYYMMDD_` es la fecha de generación (8 dígitos) (ej.: `20241215_article-EsPersonal.md`)
 
 ---
 
@@ -24,14 +23,14 @@ Leer el README.md y la información del proyecto aportada por el usuario, y ente
 
 ### Step 2: Elegir el tipo de artículo
 
-En Zenn hay dos tipos de artículos:
+En EsPersonal hay dos tipos de artículos:
 
 - **tech**: Artículo técnico (código, librerías, herramientas, etc.) → normalmente este
 - **idea**: Artículo de ideas (reflexiones, carrera, ensayo, etc.)
 
 ### Step 3: Generar el artículo
 
-Crear el artículo en `.draft/YYYYMMDD_article-zenn.md` siguiendo esta estructura.
+Crear el artículo en `.draft/YYYYMMDD_article-EsPersonal.md` siguiendo esta estructura.
 
 ---
 
@@ -85,7 +84,7 @@ _meta:
 | sources | Material usado (rutas en ideas/) |
 | generated_at | Fecha de generación |
 
-**Nota:** `_meta` es para gestión del artículo; puedes eliminarlo antes de publicar en Zenn.
+**Nota:** `_meta` es para gestión del artículo; puedes eliminarlo antes de publicar en EsPersonal.
 
 ### Section Structure
 
@@ -208,7 +207,7 @@ Empatía:
 ### Bloques de código
 
 - Indicar siempre el lenguaje (```python, ```typescript, etc.)
-- Escribir comentarios en español (si el artículo es para Zenn en español)
+- Escribir comentarios en español (si el artículo es para EsPersonal en español)
 - Proveer código completo y ejecutable
 - Incluir ejemplos de salida (formato `# =>`)
 
@@ -224,7 +223,7 @@ Empatía:
 
 ---
 
-## Zenn Markdown Extensions
+## EsPersonal Markdown Extensions
 
 **Caja de mensaje:**
 

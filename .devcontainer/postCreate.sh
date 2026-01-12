@@ -12,9 +12,15 @@ if [ -n "${GITHUB_USER:-}" ] && [ -n "${GITHUB_TOKEN:-}" ]; then
   git config --global credential.useHttpPath true
 fi
 
-npm i -g backlog.md
+# Install Backlog.md CLI (optional)
+if [ "${INSTALL_BACKLOG_MD:-false}" = "true" ]; then
+  echo "Installing Backlog.md CLI..."
+  npm i -g backlog.md
+else
+  echo "Skipping Backlog.md CLI (set INSTALL_BACKLOG_MD=true to enable)"
+fi
 
-# Install Claude Code CLI (optional - set INSTALL_CLAUDE=true in devcontainer.json)
+# Install Claude Code CLI (optional)
 if [ "${INSTALL_CLAUDE:-false}" = "true" ]; then
   echo "Installing Claude Code CLI..."
   curl -fsSL https://claude.ai/install.sh | bash || echo "Claude CLI installation failed (non-blocking)"

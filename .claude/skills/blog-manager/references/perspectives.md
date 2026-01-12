@@ -219,7 +219,7 @@ description: "Anunciar nuevas funcionalidades o releases"
 También es posible combinar varias perspectivas:
 
 ```
-> Escribe un artículo de Zenn a partir de ideas/20241215_new-lib.md con showcase + tutorial
+> Escribe un artículo de EsPersonal a partir de ideas/20241215_new-lib.md con showcase + tutorial
 ```
 
 En ese caso:

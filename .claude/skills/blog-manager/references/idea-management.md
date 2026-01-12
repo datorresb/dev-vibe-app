@@ -158,8 +158,8 @@ Cuando publiques un artículo, actualiza `published_to`:
 
 ```yaml
 published_to:
-  - platform: zenn
-    url: https://zenn.dev/username/articles/article-slug
+  - platform: EsPersonal
+    url: N/A
     date: 2024-01-15
   - platform: devto
     url: https://dev.to/username/article-title-xxx
@@ -212,7 +212,7 @@ published_to: []
 ---
 ```
 
-### 3. Después de publicar en Zenn
+### 3. Después de publicar en EsPersonal
 
 ```yaml
 ---
@@ -221,8 +221,8 @@ priority: high
 tags: [mcp, claude, ai]
 created: 2024-01-20
 published_to:
-  - platform: zenn
-    url: https://zenn.dev/ayu/articles/mcp-server-intro
+  - platform: EsPersonal
+    url: N/A
     date: 2024-01-25
 ---
 ```
@@ -236,8 +236,8 @@ priority: high
 tags: [mcp, claude, ai]
 created: 2024-01-20
 published_to:
-  - platform: zenn
-    url: https://zenn.dev/ayu/articles/mcp-server-intro
+  - platform: EsPersonal
+    url: N/A
     date: 2024-01-25
   - platform: devto
     url: https://dev.to/ayu/how-to-build-mcp-server-xxx

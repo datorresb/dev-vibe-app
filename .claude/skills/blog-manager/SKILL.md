@@ -1,6 +1,6 @@
 ---
 name: blog-manager
-description: Use for all blog writing tasks including creating articles (Zenn, dev.to/Medium English), managing ideas, and setting up blog projects. This is the unified entry point for technical blog writing workflow. Supports idea tracking with status management (backlog/in-progress/done).
+description: Use for all blog writing tasks including creating articles (EsPersonal, dev.to/Medium English), managing ideas, and setting up blog projects. This is the unified entry point for technical blog writing workflow. Supports idea tracking with status management (backlog/in-progress/done).
 ---
 
 # Blog Manager Skill
@@ -12,17 +12,17 @@ Esta skill proporciona un flujo de trabajo unificado para escribir blogs técnic
 - Configurar proyectos de escritura de blog
 - Gestionar el estado de ideas de artículos (backlog → in-progress → done)
 - Generar artículos aplicando una perspectiva (perspective)
-- Generar artículos (Zenn en español / dev.to y Medium en inglés)
+- Generar artículos (EsPersonal en español / dev.to y Medium en inglés)
 - Actualizar el estado tras publicar y ayudar con la promoción
 
 ---
 
 ## Three-Layer Structure
 
-La escritura del blog se gestiona en 3 capas: “material”, “perspectiva” y “entregable”.
+La escritura del EsPersonal se gestiona en 3 capas: “material”, “perspectiva” y “entregable”.
 
 ```
-my-blog/
+my-notes/
 ├── ideas/                  # Material (ideas reutilizables)
 │   ├── YYYYMMDD_langchain-tips.md
 │   └── YYYYMMDD_rag-patterns.md
@@ -31,7 +31,7 @@ my-blog/
 │   ├── personal.md         # Opinión personal
 │   └── tutorial.md         # Tutorial práctico (hands-on)
 ├── .draft/                 # Artículos generados (resultado de una ejecución)
-│   └── YYYYMMDD_article-zenn.md
+│   └── YYYYMMDD_article-EsPersonal.md
 └── articles/               # Para publicar
 ```
 
@@ -49,7 +49,7 @@ my-blog/
 ## When to Use
 
 - Cuando te digan “escribe un artículo” o “escribe un blog”
-- Cuando vayas a crear artículos para Zenn, dev.to o Medium
+- Cuando vayas a crear artículos para EsPersonal, dev.to o Medium
 - Cuando quieras configurar un nuevo proyecto de blog
 - Cuando quieras revisar la lista/estado de ideas de artículos
 - Cuando necesites actualizar el estado tras publicar
@@ -65,7 +65,7 @@ El material de origen para un artículo se puede obtener de dos formas:
 Generar un artículo a partir de una idea ya anotada en `ideas/`:
 
 ```
-> Escribe un artículo para Zenn basado en ideas/20241215_langchain-tips.md
+> Escribe un artículo para EsPersonal basado en ideas/20241215_langchain-tips.md
 ```
 
 ### Patrón B: desde un directorio de desarrollo (especificación directa)
@@ -73,7 +73,7 @@ Generar un artículo a partir de una idea ya anotada en `ideas/`:
 Generar un artículo especificando directamente una función concreta de un proyecto en desarrollo:
 
 ```
-> Escribe un artículo para Zenn sobre la función de autenticación de /path/to/project
+> Escribe un artículo para EsPersonal sobre la función de autenticación de /path/to/project
 > Convierte la implementación de LangGraph de @myproject/ en un artículo para dev.to
 > Escribe un artículo sobre la funcionalidad de servidor MCP de este repositorio
 ```
@@ -146,14 +146,14 @@ La “perspectiva” se especifica al generar el artículo y se gestiona de form
 
 ```
 # Referenciar una plantilla
-> Escribe un artículo para Zenn basado en ideas/20241215_mcp-server.md con la perspectiva showcase
+> Escribe un artículo para EsPersonal basado en ideas/20241215_mcp-server.md con la perspectiva showcase
 
 # Especificación directa
 > Convierte ideas/20241215_new-feature.md en un artículo
 > Perspectiva: con un tono moderado y como opinión personal
 
 # Múltiples materiales + una perspectiva
-> Escribe un artículo para Zenn con perspectiva tutorial usando ideas/20241210_langchain-tips.md y ideas/20241212_rag-patterns.md
+> Escribe un artículo para EsPersonal con perspectiva tutorial usando ideas/20241210_langchain-tips.md y ideas/20241212_rag-patterns.md
 ```
 
 ### Plantillas de perspectiva estándar
@@ -169,7 +169,7 @@ Para más detalles, consulta [perspectives.md](references/perspectives.md).
 
 ### Metadatos del artículo generado
 
-En `.draft/YYYYMMDD_article-zenn.md` se registran la perspectiva y las fuentes usadas:
+En `.draft/YYYYMMDD_article-EsPersonal.md` se registran la perspectiva y las fuentes usadas:
 
 ```yaml
 ---
@@ -214,13 +214,13 @@ _meta:
 │  3. Empezar a escribir                                         │
 │     Actualizar status: in-progress                              │
 │     Elegir la plataforma:                                      │
-│     - Zenn (español) → references/zenn-guide.md                │
+│     - EsPersonal (español) → references/EsPersonal-guide.md                │
 │     - dev.to/Medium (inglés) → references/devto-guide.md       │
 └─────────────────┬───────────────────────────────────────────┘
                   ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  4. El artículo se genera en .draft/                            │
-│     - .draft/YYYYMMDD_article-zenn.md (para Zenn)              │
+│     - .draft/YYYYMMDD_article-EsPersonal.md (para EsPersonal)              │
 │     - .draft/YYYYMMDD_article-devto.md (para dev.to)           │
 │     - .draft/YYYYMMDD_article-medium.md (para Medium, opcional)│
 └─────────────────┬───────────────────────────────────────────┘
@@ -229,12 +229,13 @@ _meta:
 │  5. Revisión y edición                                         │
 │     - Revisar el contenido y ajustar                            │
 │     - Añadir imágenes/GIF                                       │
-│     - Zenn: comprobar con npx zenn preview                       │
+│     - (opcional) comprobar el render con la herramienta de tu plataforma │
+│       o con el preview de Markdown de VS Code                    │
 └─────────────────┬───────────────────────────────────────────┘
                   ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  6. Mover al directorio definitivo                              │
-│     .draft/YYYYMMDD_article-zenn.md → articles/slug.md      │
+│     .draft/YYYYMMDD_article-EsPersonal.md → articles/slug.md      │
 │     .draft/YYYYMMDD_article-devto.md → external/devto/published/│
 └─────────────────┬───────────────────────────────────────────┘
                   ▼
@@ -257,14 +258,14 @@ Elegir la plataforma según lo que pida el usuario:
 
 | Palabras clave | Plataforma | Guía |
 |-----------|-----------------|--------|
-| “Zenn”, “español”, “artículo técnico” | Zenn | [zenn-guide.md](references/zenn-guide.md) |
+| EsPersonal, “español”, “artículo técnico” | EsPersonal | [EsPersonal-guide.md](references/EsPersonal-guide.md) |
 | “dev.to”, “inglés”, “lanzamiento” | dev.to | [devto-guide.md](references/devto-guide.md) |
 | “Medium”, “historia” | Medium | [devto-guide.md](references/devto-guide.md) (modo Medium) |
-| “ambos”, “multi” | Zenn + dev.to | Generar ambos |
+| “ambos”, “multi” | EsPersonal + dev.to | Generar ambos |
 
 **Si la plataforma no está clara:**
 Preguntar al usuario:
-- Para lectores en español → Zenn
+- Para lectores en español → EsPersonal
 - Para lectores globales → dev.to/Medium
 - Ambas → generar para ambas plataformas
 
@@ -277,7 +278,7 @@ Preguntar al usuario:
 | [directory-structure.md](references/directory-structure.md) | Estructura de directorios del proyecto |
 | [idea-management.md](references/idea-management.md) | Gestión de frontmatter de ideas (material) |
 | [perspectives.md](references/perspectives.md) | Definición y uso de plantillas de perspectiva |
-| [zenn-guide.md](references/zenn-guide.md) | Guía para generar artículos para Zenn (español) |
+| [EsPersonal-guide.md](references/EsPersonal-guide.md) | Guía para generar artículos para EsPersonal (español) |
 | [devto-guide.md](references/devto-guide.md) | Guía para generar artículos para dev.to/Medium (inglés) |
 | [promotion-tips.md](references/promotion-tips.md) | Estrategia y timing de promoción |
 
@@ -298,28 +299,27 @@ Preguntar al usuario:
 ```
 → Editar el frontmatter según [idea-management.md](references/idea-management.md)
 
-### 3. Generar artículo para Zenn (desde ideas/)
+### 3. Generar artículo para EsPersonal (desde ideas/)
 ```
-> Escribe un artículo para Zenn basado en ideas/20241215_langchain-tips.md
+> Escribe un artículo para EsPersonal basado en ideas/20241215_langchain-tips.md
 ```
-→ Generar `.draft/YYYYMMDD_article-zenn.md` siguiendo [zenn-guide.md](references/zenn-guide.md)
-
+→ Generar `.draft/YYYYMMDD_article-EsPersonal.md` siguiendo [EsPersonal-guide.md](references/EsPersonal-guide.md)
 ### 4. Generar artículo especificando perspectiva
 ```
-> Escribe un artículo para Zenn basado en ideas/20241215_mcp-server.md con perspectiva showcase
+> Escribe un artículo para EsPersonal basado en ideas/20241215_mcp-server.md con perspectiva showcase
 > Convierte ideas/20241215_new-lib.md en un artículo con perspectiva personal
 ```
 → Aplicar la plantilla en perspectives/ y generar el artículo
 
 ### 5. Generar artículo combinando varios materiales
 ```
-> Escribe un artículo para Zenn con perspectiva tutorial usando ideas/20241210_langchain-tips.md y ideas/20241212_rag-patterns.md
+> Escribe un artículo para EsPersonal con perspectiva tutorial usando ideas/20241210_langchain-tips.md y ideas/20241212_rag-patterns.md
 ```
 → Integrar varios materiales y generar el artículo con la perspectiva indicada
 
 ### 6. Generar artículo desde un directorio de desarrollo
 ```
-> Escribe un artículo para Zenn sobre la función de autenticación de /path/to/myproject
+> Escribe un artículo para EsPersonal sobre la función de autenticación de /path/to/myproject
 > Convierte el patrón de procesamiento en paralelo de @langgraph-plugin/ en un artículo con perspectiva showcase
 ```
 → Leer código → generar artículo → crear registro automáticamente en `ideas/`
@@ -333,14 +333,14 @@ Preguntar al usuario:
 
 ### 8. Generar ambos
 ```
-> Escribe artículos para Zenn y dev.to basados en ideas/20241215_mcp-intro.md con perspectiva showcase
+> Escribe artículos para EsPersonal y dev.to basados en ideas/20241215_mcp-intro.md con perspectiva showcase
 ```
 → Generar ambas versiones con la misma perspectiva
 
 ### 9. Actualización tras publicar
 ```
 > Cambia el status de ideas/20241215_langchain-tips.md a done
-> Añade https://zenn.dev/xxx/articles/yyy a published_to
+> Añade https://medium.dev/xxx/articles/yyy a published_to
 ```
 → Actualizar el frontmatter
 
@@ -356,12 +356,11 @@ Preguntar al usuario:
 
 | Archivo | Descripción |
 |---------|------|
-| `.draft/YYYYMMDD_article-zenn.md` | Artículo para Zenn (español) |
+| `.draft/YYYYMMDD_article-EsPersonal.md` | Artículo para EsPersonal (español) |
 | `.draft/YYYYMMDD_article-devto.md` | Artículo para dev.to (inglés) |
 | `.draft/YYYYMMDD_article-medium.md` | Artículo para Medium (inglés, opcional) |
 
-**Formato del nombre de archivo:** `YYYYMMDD_` es la fecha de generación (8 dígitos) (ej.: `20241215_article-zenn.md`)
-
+**Formato del nombre de archivo:** `YYYYMMDD_` es la fecha de generación (8 dígitos) (ej.: `20241215_article-EsPersonal.md`)
 ---
 
 ## Checklist para generar artículos
@@ -385,7 +384,7 @@ Cuando el usuario pida “escribe un artículo”, si falta información, confir
 ## Notes
 
 - Toda generación de artículos se escribe en `.draft/` (ubicación temporal)
-- Cuando esté listo, mover a `articles/` (Zenn) o `external/` (otros)
+- Cuando esté listo, mover a `articles/` (EsPersonal) o `external/` (otros)
 - La gestión de estados de ideas ayuda a evitar artículos duplicados
 - Puedes publicar la misma idea en varias plataformas (seguimiento con `published_to`)
 - Los ajustes finos tras generar se pueden hacer a mano o pidiéndoselos a Claude Code
