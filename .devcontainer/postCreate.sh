@@ -28,4 +28,12 @@ else
   echo "Skipping Claude CLI (set INSTALL_CLAUDE=true to enable)"
 fi
 
+# Install Azure CLI (optional)
+if [ "${INSTALL_AZURE_CLI:-false}" = "true" ]; then
+  echo "Installing Azure CLI..."
+  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash || echo "Azure CLI installation failed (non-blocking)"
+else
+  echo "Skipping Azure CLI (set INSTALL_AZURE_CLI=true to enable)"
+fi
+
 echo "postCreate done"

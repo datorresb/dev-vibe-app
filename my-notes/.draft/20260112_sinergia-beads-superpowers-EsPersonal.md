@@ -150,7 +150,7 @@ bd ready
 #   │       ├── __init__.py       # Exports públicos
 #   │       ├── state.py          # Definición de estados
 #   │       ├── tools.py          # LLM y herramientas
-#   │       └── graph.py          # Definición del grafo
+#   │       └── agent.py          # Definición del grafo
 #   ├── pyproject.toml
 #   └── .env.example
 
