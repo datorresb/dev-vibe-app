@@ -14,7 +14,8 @@ services:
       - ./src:/app/src:ro
       - ./chainlit_app.py:/app/chainlit_app.py:ro
       # Mount Azure CLI credentials for local development (MSI in production)
-      - ~/.azure:/home/appuser/.azure:ro
+      # Note: rw needed because Azure CLI writes cache files
+      - ~/.azure:/home/appuser/.azure
     env_file:
       - .env.local
     environment:
