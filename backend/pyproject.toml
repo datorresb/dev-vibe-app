@@ -1,0 +1,16 @@
+[project]
+name = "chatbot-poc"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "langgraph",
+    "langchain-openai",
+    "chainlit",
+    "azure-identity",
+    "httpx",
+    "pandas",
+    "matplotlib",
+]
+
+[tool.uv]
+dev-dependencies = ["pytest", "ruff"]
