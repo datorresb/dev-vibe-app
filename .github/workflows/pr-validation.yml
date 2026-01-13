@@ -20,6 +20,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./backend
+          target: runtime  # Production image without Azure CLI
           push: false
           tags: chainlit-app:pr-${{ github.event.number }}
           cache-from: type=gha

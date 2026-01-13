@@ -3,7 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: chainlit-app:local
+      target: dev  # Use 'runtime' for production, 'dev' for local with Azure CLI
+    image: chainlit-app:dev
     container_name: chainlit-app
     ports:
       - "8000:8000"
@@ -12,6 +13,8 @@ services:
       # Note: For true hot reload, rebuild the container
       - ./src:/app/src:ro
       - ./chainlit_app.py:/app/chainlit_app.py:ro
+      # Mount Azure CLI credentials for local development (MSI in production)
+      - ~/.azure:/home/appuser/.azure:ro
     env_file:
       - .env.local
     environment:

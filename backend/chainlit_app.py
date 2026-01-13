@@ -4,6 +4,7 @@ import os
 from uuid import uuid4
 
 import chainlit as cl
+from chainlit.server import app
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from starlette.responses import JSONResponse
@@ -20,13 +21,8 @@ async def health_check(request):
     return JSONResponse({"status": "healthy", "service": "chainlit-app"})
 
 
-# Register custom routes with Chainlit's Starlette app
-@cl.on_app_startup
-async def on_app_startup():
-    """Register custom routes when the app starts."""
-    app = cl.get_app()
-    # Insert health route at the beginning so it takes priority
-    app.routes.insert(0, Route("/health", health_check, methods=["GET"]))
+# Register health route at module load time (before Chainlit's catch-all)
+app.routes.insert(0, Route("/health", health_check, methods=["GET"]))
 
 
 # Global agent and memory instances
