@@ -12,5 +12,11 @@ dependencies = [
     "matplotlib",
 ]
 
-[tool.uv]
-dev-dependencies = ["pytest", "ruff"]
+[dependency-groups]
+dev = ["pytest", "pytest-asyncio", "ruff"]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: integration tests that may require Azure OpenAI credentials",
+]
+asyncio_mode = "auto"

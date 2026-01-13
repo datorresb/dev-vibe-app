@@ -1,0 +1,6 @@
+[project]
+enable_telemetry = false
+
+[UI]
+name = "Chatbot POC"
+description = "LangGraph + Chainlit + Azure OpenAI"
