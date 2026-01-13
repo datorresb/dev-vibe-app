@@ -1,0 +1,55 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/**'
+      - 'infrastructure/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build container image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: false
+          tags: chainlit-app:pr-${{ github.event.number }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Security scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: chainlit-app:pr-${{ github.event.number }}
+          format: sarif
+          output: trivy-results.sarif
+
+      - name: Upload scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+
+      - name: Test container startup
+        run: |
+          docker run -d --name test -p 8000:8000 \
+            -e AZURE_OPENAI_ENDPOINT=test \
+            -e AZURE_OPENAI_CHAT_DEPLOYMENT=test \
+            -e AZURE_OPENAI_API_VERSION=test \
+            chainlit-app:pr-${{ github.event.number }}
+          sleep 30
+          docker logs test
+          docker stop test
+
+      - name: Validate Bicep
+        uses: azure/CLI@v1
+        with:
+          inlineScript: az bicep build --file infrastructure/main.bicep

@@ -1,0 +1,53 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Environment files (secrets)
+.env
+.env.local
+.env.*.local
+
+# Tests (not needed in production image)
+tests/
+
+# Git
+.git/
+.gitignore
+
+# Docker files (no need to copy these into the image)
+docker-compose.yml
+docker-compose*.yml
+Dockerfile*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Misc
+.DS_Store
+Thumbs.db

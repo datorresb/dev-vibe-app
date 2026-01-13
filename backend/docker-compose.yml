@@ -1,0 +1,25 @@
+services:
+  chainlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chainlit-app:local
+    container_name: chainlit-app
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount source code read-only for development visibility
+      # Note: For true hot reload, rebuild the container
+      - ./src:/app/src:ro
+      - ./chainlit_app.py:/app/chainlit_app.py:ro
+    env_file:
+      - .env.local
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/health', timeout=5).raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped

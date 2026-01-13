@@ -1,0 +1,92 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - 'infrastructure/**'
+      - '.github/workflows/main-deploy.yml'
+
+env:
+  AZURE_RESOURCE_GROUP: rg-dev-vibe-app
+  REGISTRY: devvibeappdevacr.azurecr.io
+  IMAGE_NAME: chainlit-app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - run: az acr login --name devvibeappdevacr
+
+      - uses: docker/setup-buildx-action@v3
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha
+            latest
+
+      - uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-infrastructure:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
+          template: ./infrastructure/main.bicep
+          parameters: >
+            ./infrastructure/parameters.json
+            azureOpenAIEndpoint=${{ secrets.AZURE_OPENAI_ENDPOINT }}
+            azureOpenAIChatDeployment=${{ secrets.AZURE_OPENAI_CHAT_DEPLOYMENT }}
+          deploymentMode: Incremental
+
+  deploy-app:
+    needs: [build, deploy-infrastructure]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: devvibeapp-dev-app
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Health check
+        run: |
+          for i in {1..10}; do
+            if curl -sf https://devvibeapp-dev-app.azurewebsites.net/health; then
+              echo "Health check passed"
+              exit 0
+            fi
+            sleep 30
+          done
+          exit 1
